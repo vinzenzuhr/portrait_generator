@@ -16,6 +16,7 @@
  * Regarding the GNU General Public License have a look at <https://www.gnu.org/licenses/>.
  */
 #include "camera.h"
+#include "face_detector.h"
 #include <iostream>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -27,21 +28,21 @@ using namespace cv;
 int main()
 {
     std::unique_ptr<i_camera> webcam(new camera(0));
-    //std::unique_ptr<i_face_detector> detector(new face_detector);
+    std::unique_ptr<i_face_detector> detector(new face_detector);
     Mat img;
     Mat last_img;
-    //std::shared_ptr<std::vector<cv::Rect>> faces(new std::vector<cv::Rect>);
+    std::shared_ptr<std::vector<cv::Rect>> faces(new std::vector<cv::Rect>);
     while (true) {
         img = webcam->get_current_img();
         if (!img.empty()) {
             last_img = img;
-            /*std::shared_ptr<std::vector<cv::Rect>> new_faces = std::make_shared<std::vector<cv::Rect>>(detector->detect_faces(img));
+            std::shared_ptr<std::vector<cv::Rect>> new_faces = std::make_shared<std::vector<cv::Rect>>(detector->detect_faces(img));
             if (!new_faces->empty())
                 faces = new_faces;
             for_each((*faces).begin(), (*faces).end(), [&img](cv::Rect face) {
                 cv::rectangle(img, face.tl(), face.br(), Scalar(255, 0, 255));
                 });
-            */
+
             imshow("Frame", img);
         }
 
@@ -49,6 +50,5 @@ int main()
             break;
         waitKey(1);
     }
-
     return 0;
 }

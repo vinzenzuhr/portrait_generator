@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.0)
 # set build type to Debug/Release
 set(CMAKE_BUILD_TYPE "Debug")
 # Create executable using the specified src
-add_executable(portrait_generator main.cpp camera.h camera.cpp i_camera.h)
+add_executable(portrait_generator main.cpp camera.h camera.cpp face_detector.h face_detector.cpp i_camera.h i_face_detector.h)
 
 #Include OpenCV
 find_package(OpenCV REQUIRED)
