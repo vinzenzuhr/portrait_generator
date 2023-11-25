@@ -17,10 +17,12 @@
  */
 #include "camera.h"
 #include "face_detector.h"
+#include "img_editor.h"
 #include <iostream>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
+#include "portrait.h"
 
 using namespace std;
 using namespace cv;
@@ -50,5 +52,16 @@ int main()
             break;
         waitKey(1);
     }
+
+    std::unique_ptr<i_img_editor> editor(new img_editor(last_img));
+    editor->set_bounding_boxes(faces);
+    std::vector<portrait> portraits = editor->get_portraits();
+    int i = 0;
+    for_each(portraits.begin(), portraits.end(), [&i](portrait img) {
+        imshow(&"portrait: " [ i], img.get_img());
+        i++;
+    });
+    cv::waitKey();
+
     return 0;
 }
