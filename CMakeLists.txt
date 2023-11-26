@@ -10,7 +10,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenCV REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(OpenGL REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGLWidgets)
 qt_standard_project_setup()
 
 
@@ -32,7 +33,7 @@ add_executable(${PROJECT_NAME} main.cpp camera.cpp camera.h face_detector.cpp fa
 target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
-target_link_libraries(${PROJECT_NAME} Qt6::Widgets)
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::OpenGLWidgets)#♠ ${OPENGL_LIBRARIES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     WIN32_EXECUTABLE ON
