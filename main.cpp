@@ -23,12 +23,22 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include "portrait.h"
+#include <QApplication>
+#include "widget.h"
 
 using namespace std;
 using namespace cv;
 
-int main()
+int main(int argc, char *argv[])
 {
+
+
+    QApplication a(argc, argv);
+    widget w;
+    w.show();
+    /*
+    std::cout << "test 1" << std::endl;
+
     std::unique_ptr<i_camera> webcam(new camera(0));
     std::unique_ptr<i_face_detector> detector(new face_detector);
     Mat img;
@@ -62,6 +72,6 @@ int main()
         i++;
     });
     cv::waitKey();
-
-    return 0;
+    */
+    return a.exec();
 }

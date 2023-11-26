@@ -15,7 +15,7 @@
  *
  * Regarding the GNU General Public License have a look at <https://www.gnu.org/licenses/>.
  */
-#pragma 
+#pragma once
 #include "i_camera.h" 
 #include <opencv2/videoio.hpp>
 
