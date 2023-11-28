@@ -9,13 +9,13 @@
 class controller_camera
 {
 public:
-    controller_camera(i_camera *camera, i_face_detector *detector);
+    controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector);
 
     void draw_on_image();
 
 private:
-    std::unique_ptr<i_camera> m_camera;
-    std::unique_ptr<i_face_detector> m_face_detector;
+    std::shared_ptr<i_camera> m_camera;
+    std::shared_ptr<i_face_detector> m_face_detector;
     view_camera m_view;
 };
 

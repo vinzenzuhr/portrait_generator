@@ -2,10 +2,10 @@
 #include <iostream>
 #include <opencv2/imgproc.hpp>
 
-controller_camera::controller_camera(i_camera *camera, i_face_detector *detector) :
+controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector) :
     m_camera(camera),
     m_face_detector(detector),
-    m_view( view_camera(this) )
+    m_view( std::shared_ptr<controller_camera>(this) )
 {
     m_view.show();
 }

@@ -34,7 +34,10 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-    controller_camera w(new camera(0), new face_detector);
+    std::shared_ptr<i_camera> webcam(new camera(0));
+    std::shared_ptr<i_face_detector> detector(new face_detector);
+
+    controller_camera w(webcam, detector);
     /*
     std::cout << "test 1" << std::endl;
 

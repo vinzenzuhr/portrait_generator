@@ -6,22 +6,26 @@
 
 
 
-view_camera::view_camera(controller_camera *controller, QWidget *parent) :
+view_camera::view_camera(std::shared_ptr<controller_camera> controller, QWidget *parent) :
     QOpenGLWidget(parent),
     ui(new Ui::view_camera),
     m_controller(controller)
 {
     ui->setupUi(this);
 
+
+
     //TODO: Testen ob mit shared ptr ich kein Fehler bekomme
-    auto scene = new QGraphicsScene(this);
-    ui->graphics_view->setScene(scene);
-    m_picture = scene->addPixmap(QPixmap());
+    m_scene.reset(new QGraphicsScene(this));
+    ui->graphics_view->setScene(m_scene.get());
+    m_picture.reset(m_scene->addPixmap(QPixmap()));
+
+
 
     int GUI_RATE_MS=50;
-    auto timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(draw_on_image()));
-    timer->start(GUI_RATE_MS);
+    m_timer.reset(new QTimer(this));
+    connect(m_timer.get(), SIGNAL(timeout()), this, SLOT(draw_on_image()));
+    m_timer->start(GUI_RATE_MS);
 }
 
 view_camera::~view_camera()

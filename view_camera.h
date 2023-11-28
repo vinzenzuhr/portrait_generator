@@ -16,7 +16,7 @@ class view_camera : public QOpenGLWidget
     Q_OBJECT
 
 public:
-    view_camera(controller_camera *controller, QWidget *parent = nullptr);
+    view_camera(std::shared_ptr<controller_camera> controller, QWidget *parent = nullptr);
 
     ~view_camera();
 
@@ -27,8 +27,11 @@ private slots:
 
 private:
     Ui::view_camera *ui;
-    std::unique_ptr<controller_camera> m_controller;
-    QGraphicsPixmapItem *m_picture;
+    std::shared_ptr<controller_camera> m_controller;
+    //std::unique_ptr<QGraphicsPixmapItem> m_picture;
+    std::unique_ptr<QGraphicsScene> m_scene;
+    std::unique_ptr<QGraphicsPixmapItem> m_picture;
+    std::unique_ptr<QTimer> m_timer;
 };
 
 #endif // VIEW_CAMERA_H
