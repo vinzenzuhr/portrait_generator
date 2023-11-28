@@ -25,16 +25,16 @@
 class camera : public i_camera
 {
 public: 
-	/**
-	* Grabs a camera
-	* 
-	* @param camera_id id of the camera device to open. To open default camera using default backend just pass 0.
-	* 
-	* @throws std::runtime_error thrown if it couldn't open the camera.
-	* 
-	* @exceptsafe strong exception guarantee.
-	*/
-	explicit camera(int camera_id = 0);
+    /**
+    * Grabs a camera
+    *
+    * @param camera_id id of the camera device to open. To open default camera using default backend just pass 0.
+    *
+    * @throws std::runtime_error thrown if it couldn't open the camera.
+    *
+    * @exceptsafe strong exception guarantee.
+    */
+    explicit camera(int camera_id = 0);
 
 	virtual ~camera() {};
 
@@ -43,7 +43,7 @@ public:
 	*/
 	virtual cv::Mat get_current_img() override;
 
-private: 
+private:
 	// camera_id of grabbed camera
 	int m_camera_id;
 

@@ -24,7 +24,8 @@
 #include <opencv2/imgproc.hpp>
 #include "portrait.h"
 #include <QApplication>
-#include "widget.h"
+#include "view_camera.h"
+#include "controller_camera.h"
 
 using namespace std;
 using namespace cv;
@@ -32,10 +33,8 @@ using namespace cv;
 int main(int argc, char *argv[])
 {
 
-
     QApplication a(argc, argv);
-    widget w;
-    w.show();
+    controller_camera w(new camera(0), new face_detector);
     /*
     std::cout << "test 1" << std::endl;
 

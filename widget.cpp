@@ -43,7 +43,7 @@ void widget::DisplayImage(){
     cv::cvtColor(img,img,COLOR_BGR2RGB); //Qt reads in RGB whereas CV in BGR
     QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888); //Converts the CV image into Qt standard format
     picture->setPixmap(QPixmap::fromImage(imdisplay)); //display the image
-
+    //ui->label->setPixmap();
 }
 
 
