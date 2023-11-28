@@ -24,9 +24,9 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="display_image">
-        <property name="text">
-         <string>TextLabel</string>
+       <widget class="QGraphicsView" name="graphicsView">
+        <property name="dragMode">
+         <enum>QGraphicsView::ScrollHandDrag</enum>
         </property>
        </widget>
       </item>
@@ -49,7 +49,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="photo_button">
         <property name="maximumSize">
          <size>
           <width>50</width>
