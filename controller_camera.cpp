@@ -1,5 +1,4 @@
 #include "controller_camera.h"
-#include <iostream>
 #include <opencv2/imgproc.hpp>
 
 controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :

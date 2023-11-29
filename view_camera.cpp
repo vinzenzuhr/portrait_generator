@@ -1,9 +1,9 @@
 #include "controller_camera.h"
-#include "view_camera.h"
-#include <QGraphicsItem>
-#include <QTimer>
 #include <iostream>
+#include <memory>
+#include <QGraphicsItem>
 #include "ui_view_camera.h"
+#include "view_camera.h"
 
 
 
@@ -28,8 +28,10 @@ void view_camera::draw_on_image() {
     std::for_each(controllers.begin(), controllers.end(),[](std::weak_ptr<controller_camera> controller){
         if (std::shared_ptr<controller_camera> spt = controller.lock())
             spt->draw_on_image();
-        else
-            std::cout << "gw is expired\n"; //TODO: throw exception
+        else{
+            std::cerr << "ERROR! Pointer was already deleted.";
+            throw std::runtime_error("ERROR! Pointer was already deleted."); //TODO: kommentieren
+        }
     });
 }
 

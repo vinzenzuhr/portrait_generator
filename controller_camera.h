@@ -4,9 +4,8 @@
 #include "i_camera.h"
 #include "i_face_detector.h"
 #include <memory>
+#include <QTimer>
 #include "view_camera.h"
-#include <QObject>
-//TODO: alle includes übeprüfen von control
 
 class controller_camera : public QObject
 {

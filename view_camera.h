@@ -4,13 +4,13 @@
 #include <qgraphicsscene>
 #include <QGraphicsPixmapItem>
 #include <QOpenGLWidget>
-#include <QTimer>
 #include <memory>
 
 namespace Ui {
 class view_camera;
 }
 
+//Forward declaration to avoid circular inclusions of header files
 class controller_camera;
 
 class view_camera : public QOpenGLWidget
@@ -39,7 +39,6 @@ private:
 
     QGraphicsScene *m_scene;
     QGraphicsPixmapItem *m_picture;
-    QTimer *m_timer;
 };
 
 #endif // VIEW_CAMERA_H
