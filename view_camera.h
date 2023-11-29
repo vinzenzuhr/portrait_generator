@@ -2,7 +2,6 @@
 #define VIEW_CAMERA_H
 
 #include <qgraphicsscene>
-#include <QGraphicsPixmapItem>
 #include <QOpenGLWidget>
 #include <memory>
 
@@ -30,14 +29,13 @@ public:
     void set_image(QImage img);
 
 private slots:
-    void draw_on_image();
+    void click_make_photo();
 
 private:
-    Ui::view_camera *ui;
-    std::list<std::weak_ptr<controller_camera>> controllers;
-
+    std::list<std::weak_ptr<controller_camera>> m_controllers;
     QGraphicsScene *m_scene;
     QGraphicsPixmapItem *m_picture;
+    Ui::view_camera *ui;
 };
 
 #endif // VIEW_CAMERA_H
