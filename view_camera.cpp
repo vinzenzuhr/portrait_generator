@@ -6,7 +6,6 @@
 #include "view_camera.h"
 
 
-
 view_camera::view_camera(QWidget *parent) :
     QOpenGLWidget(parent),
     ui(new Ui::view_camera)
@@ -16,6 +15,8 @@ view_camera::view_camera(QWidget *parent) :
     m_scene = new QGraphicsScene(this);
     ui->graphics_view->setScene(m_scene);
     m_picture = m_scene->addPixmap(QPixmap());
+
+
 }
 
 view_camera::~view_camera()

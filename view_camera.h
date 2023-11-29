@@ -33,7 +33,6 @@ private slots:
     void draw_on_image();
 
 private:
-    //std::unique_ptr<Ui::view_camera> ui;
     Ui::view_camera *ui;
     std::list<std::weak_ptr<controller_camera>> controllers;
 
