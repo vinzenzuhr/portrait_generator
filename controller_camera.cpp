@@ -7,27 +7,16 @@ controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shar
     m_face_detector(detector),
     m_view(view)
 {
-    //view_camera m_view;
-
-    //std::weak_ptr<controller_camera> weak_controller (std::shared_ptr<controller_camera>(this));
-
-    //m_view->register_controller(std::weak_ptr<controller_camera> (std::shared_ptr<controller_camera>(this)));
     m_view->show();
-
 
     int GUI_RATE_MS=50;
     m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), m_view.get(), SLOT(draw_on_image())); //TODO: direkt draw on image aufrufe
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(draw_on_image()));
     m_timer->start(GUI_RATE_MS);
 
 }
 
-controller_camera::~controller_camera(){
-    std::cout << "Test";
-}
-
 void controller_camera::draw_on_image() {
-    qDebug() << "test";
 
     //TODO: multi threading einführen
     cv::Mat img = m_camera->get_current_img();

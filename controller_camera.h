@@ -5,14 +5,16 @@
 #include "i_face_detector.h"
 #include <memory>
 #include "view_camera.h"
-#include <QLabel>
+#include <QObject>
+//TODO: alle includes übeprüfen von control
 
-class controller_camera : public QOpenGLWidget
+class controller_camera : public QObject
 {
+
+    Q_OBJECT
+
 public:
     controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view);
-
-    ~controller_camera();
 
 public slots:
     void draw_on_image();
