@@ -26,6 +26,7 @@
 #include <QApplication>
 #include "view_camera.h"
 #include "controller_camera.h"
+#include "widget.h"
 
 using namespace std;
 using namespace cv;
@@ -34,10 +35,22 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
+
     std::shared_ptr<i_camera> webcam(new camera(0));
     std::shared_ptr<i_face_detector> detector(new face_detector);
 
-    controller_camera w(webcam, detector);
+    std::shared_ptr<view_camera> view(new view_camera());
+    std::shared_ptr<controller_camera> controller(new controller_camera (webcam, detector, view));
+    view->register_controller(std::weak_ptr<controller_camera> (controller));
+    
+
+
+    //löse das segmentation fault Problem.
+    //        Vermutung:  controller und view beistze dann  gtroller und der controller versucht wieder view abzubauen, abre dicontroller versucht wieder view abzubauen, abre dies ist nicht mehr vorhanden.
+
+    //widget w;
+    //w.show();
+
     /*
     std::cout << "test 1" << std::endl;
 
