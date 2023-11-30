@@ -57,6 +57,7 @@ void controller_camera::click_make_photo() {
     cv::Mat img;
     std::vector<cv::Rect> faces;
 
+    //Take so many photos until it recognizes at least one face
     while(faces.empty())
     {
         img = m_camera->get_current_img();

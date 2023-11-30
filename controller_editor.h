@@ -40,8 +40,9 @@ public slots:
     /**
      * @brief click_save when the button is clicked it saves the portraits
      * @param bounding_boxes bounding boxes inside the image of the portraits to be saved
+     * @param path path to save the portraits
      */
-    void click_save(std::vector<cv::Rect> bounding_boxes);
+    void click_save(std::vector<cv::Rect> bounding_boxes, std::string path);
 
 private:
     //model of the editor

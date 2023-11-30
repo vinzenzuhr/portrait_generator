@@ -17,7 +17,6 @@
  */
 #include "controller_editor.h"
 #include "opencv2/imgcodecs.hpp"
-#include "opencv2/imgproc.hpp"
 #include <windows.h>
 
 controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view) :
@@ -35,14 +34,18 @@ controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::
     m_editor->set_bounding_boxes(std::make_shared<std::vector<cv::Rect>>(faces)); //TODO: Überlegen ob ohne shared pointer
 }
 
-void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes) {
+void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes, std::string path) {
+    std::shared_ptr<std::vector<cv::Rect>> ptr_bounding_boxes(&bounding_boxes);
+    m_editor->set_bounding_boxes(ptr_bounding_boxes);
+    std::vector<portrait> portraits = m_editor->get_portraits();
+
     std::string file_name("portrait.jpg");
     int i=0;
     bool success=true;
-    for(auto itr = bounding_boxes.begin(); itr != bounding_boxes.end(); ++itr){
-        if(bounding_boxes.size()>1)
+    for(auto itr = portraits.begin(); itr != portraits.end(); ++itr){
+        if(portraits.size()>1)
             file_name="portrait_" + std::to_string(++i) + ".jpg";
-        if(!cv::imwrite(file_name, m_img(*itr)))
+        if(!cv::imwrite(path+"/"+file_name, itr->get_img()))
             success=false;
     }
     if(success)
@@ -51,5 +54,5 @@ void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes) {
         MessageBoxW(NULL,L"Failed to save portraits!", L"Error", MB_ICONEXCLAMATION );
 
 
-
+    //TODO: pfad nutzen + bild öffnen
 }

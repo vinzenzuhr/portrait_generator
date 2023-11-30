@@ -48,7 +48,7 @@ void view_camera::click_make_photo() {
             spt->click_make_photo();
         else{
             std::cerr << "ERROR! Pointer was already deleted.";
-            throw std::runtime_error("ERROR! Pointer was already deleted."); //TODO: kommentieren
+            throw std::runtime_error("ERROR! Pointer was already deleted.");
         }
     });
 }

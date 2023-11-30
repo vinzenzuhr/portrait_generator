@@ -91,6 +91,7 @@ private slots:
 
     /**
      * @brief click_save when the button is clicked call the controllers
+     * @throws std::runtime_error thrown if a controller pointer was unexpectedly deleten before.
      */
     void click_save();
 };

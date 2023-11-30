@@ -61,9 +61,9 @@ void view_editor::click_save(){
                             ));
     }
 
-    std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes](std::weak_ptr<controller_editor> controller){
+    std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes, this](std::weak_ptr<controller_editor> controller){
         if (std::shared_ptr<controller_editor> spt = controller.lock()){
-            spt->click_save(bounding_boxes);
+            spt->click_save(bounding_boxes, ui->input_path->text().toStdString());
         }
         else{
             std::cerr << "ERROR! Pointer was already deleted.";
