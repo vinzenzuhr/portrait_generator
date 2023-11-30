@@ -1,3 +1,20 @@
+/*
+ * This file is part of portrait_generator.
+ *
+ * Developed for the class "C++ Programming II" at University Berne.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * Regarding the GNU General Public License have a look at <https://www.gnu.org/licenses/>.
+ */
 #include <algorithm>
 #include "controller_editor.h"
 #include <iostream>
@@ -33,24 +50,24 @@ void view_editor::click_cancel(){
 }
 
 void view_editor::click_save(){
-    std::vector<cv::Rect> faces;
-    for(int i=0; i<m_rectangles.size();i++){
-        faces.push_back(cv::Rect(
+    std::vector<cv::Rect> bounding_boxes;
+    for(int unsigned i=0; i<m_bounding_boxes.size();i++){
+        bounding_boxes.push_back(cv::Rect(
                             //x,y origin position plus user displacement
-                            m_rectangles[i]->rect().x()+m_rectangles[i]->x(),
-                            m_rectangles[i]->rect().y()+m_rectangles[i]->y(),
-                            m_rectangles[i]->rect().width(),
-                            m_rectangles[i]->rect().height()
+                            m_bounding_boxes[i]->rect().x()+m_bounding_boxes[i]->x(),
+                            m_bounding_boxes[i]->rect().y()+m_bounding_boxes[i]->y(),
+                            m_bounding_boxes[i]->rect().width(),
+                            m_bounding_boxes[i]->rect().height()
                             ));
     }
 
-    std::for_each(m_controllers.begin(), m_controllers.end(),[faces](std::weak_ptr<controller_editor> controller){
+    std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes](std::weak_ptr<controller_editor> controller){
         if (std::shared_ptr<controller_editor> spt = controller.lock()){
-            spt->click_save(faces);
+            spt->click_save(bounding_boxes);
         }
         else{
             std::cerr << "ERROR! Pointer was already deleted.";
-            throw std::runtime_error("ERROR! Pointer was already deleted."); //TODO: kommentieren
+            throw std::runtime_error("ERROR! Pointer was already deleted.");
         }
     });
 }
@@ -70,11 +87,11 @@ void view_editor::remove_controller(std::weak_ptr<controller_editor> controller)
 }
 
 void view_editor::set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) { //TODO: In der View beim Verschieben neue bounding boxes setzen
-    std::for_each(m_rectangles.begin(), m_rectangles.end(), [this](std::shared_ptr<QGraphicsRectItem> &rect){
+    std::for_each(m_bounding_boxes.begin(), m_bounding_boxes.end(), [this](std::shared_ptr<QGraphicsRectItem> &rect){
         m_scene->removeItem(rect.get());
     });
 
-    m_rectangles.clear();
+    m_bounding_boxes.clear();
 
     std::for_each(bounding_boxes->begin(),bounding_boxes->end(), [&](cv::Rect bounding_box){
         double factor_width=1.2; //TODO: ist dies eine gute Idee hier zu machen?
@@ -88,7 +105,7 @@ void view_editor::set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> boun
                                                     bounding_box.height*factor_height,
                                                     QPen(Qt::blue)));
         rect->setFlag(QGraphicsItem::ItemIsMovable);
-        m_rectangles.push_back(rect);
+        m_bounding_boxes.push_back(rect);
     });
 }
 

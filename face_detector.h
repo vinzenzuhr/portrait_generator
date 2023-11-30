@@ -20,16 +20,14 @@
 #include <opencv2/objdetect.hpp>
 
 /**
-* Detect faces in pictures.
+* @brief face_detector Detect faces in pictures.
 */
 class face_detector : public i_face_detector
 {
 public:
 	/**
-	* Initializes face detector.
-	* 
-	* @throws std::runtime_error thrown if the detector couldn't be initialized.
-	* 
+    * @brief face_detector Initializes face detector.
+    * @throws std::runtime_error thrown if the detector couldn't be initialized.
 	* @exceptsafe strong exception guarantee.
 	*/
 	face_detector();

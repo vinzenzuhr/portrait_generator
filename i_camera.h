@@ -19,7 +19,7 @@
 #include <opencv2/core/mat.hpp>
 
  /**
- * Interface to a camera, which retrieves pictures from it.
+ * @brief i_camera Interface to a camera, which retrieves pictures from it.
  */
 class i_camera
 {
@@ -27,8 +27,7 @@ public:
 	virtual ~i_camera() {};
 
 	/**
-	* Gets an image from the camera
-	* 
+    * @brief get_current_img Gets an image from the camera
 	* @returns the video frame is returned here. If no frame has been grabbed the image will be empty (test it with Mat::empty()).
 	*/
 	virtual cv::Mat get_current_img() = 0;

@@ -26,7 +26,6 @@
 #include <QApplication>
 #include "view_camera.h"
 #include "controller_camera.h"
-#include "widget.h"
 
 using namespace std;
 using namespace cv;

@@ -20,30 +20,26 @@
 #include <chrono>
 
 /**
-* portrait which helds an image and additional informations
+* @brief portrait portrait which helds an image and additional informations
 */
 class portrait
 {
 public:
 	/**
-	* Initializes a portrait
-	* 
-	* @param img the image of the person
-	* 
-	* @throws std::runtime_error thrown if image is empty.
-	* 
+    * @brief portrait Initializes a portrait
+    * @param img the image of the person
+    * @throws std::runtime_error thrown if image is empty.
 	* @exceptsafe strong exception guarantee.
 	*/
 	explicit portrait(cv::Mat img);
 
 	/**
-	* Check invariants
+    * @brief check_invariants Check invariants
 	*/
 	void check_invariants(); 
 
 	/**
-	* get image
-	* 
+    * @brief get_img get image
 	* @returns image of the person
 	*/
 	cv::Mat get_img();

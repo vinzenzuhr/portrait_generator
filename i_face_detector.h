@@ -21,7 +21,7 @@
 #include <vector>
 
  /**
- * Interface to detector, which detects faces in pictures
+ * @brief i_face_detector Interface to detector, which detects faces in pictures
  */
 class i_face_detector
 {
@@ -29,10 +29,8 @@ public:
 	virtual ~i_face_detector() {};
 
 	/**
-	* Detects faces of different sizes in the input image.
-	* 
-	* @param img input image, where objects are detected
-	* 
+    * @brief detect_faces Detects faces of different sizes in the input image.
+    * @param img input image, where objects are detected
 	* @returns the detected objects are returned as a list of rectangles
 	*/
 	virtual std::vector<cv::Rect> detect_faces(cv::Mat img) =0; 

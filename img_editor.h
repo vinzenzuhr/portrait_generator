@@ -21,73 +21,56 @@
 #include <opencv2/core/mat.hpp>
 
 /**
-* Edits an image 
+* @brief img_editor Edits an image
 */
 class img_editor : public i_img_editor
 {
 public:
 	/**
-	* Initializes the editor
-	* 
-	* @param img image which will be edited
-	* 
-	* @throws std::runtime_error thrown if image is empty.
-	* 
+    * @brief img_editor Initializes the editor
+    * @param img image which will be edited
+    * @throws std::runtime_error thrown if image is empty.
 	* @exceptsafe strong exception guarantee.
 	*/
 	explicit img_editor(cv::Mat img);
 
 	virtual ~img_editor() {};
 
-	/**
-	* Get bounding boxes
-	* 
-	* @returns shared pointer to bounding boxes
-	*/
+    /**
+    * @copydoc i_img_editor::get_bounding_boxes()
+    */
 	virtual std::shared_ptr<std::vector<cv::Rect>> get_bounding_boxes() override;
 
-	/**
-	* Get image
-	* 
-	* @returns image which is edited
-	*/
+    /**
+    * @copydoc i_img_editor::get_img()
+    */
 	virtual cv::Mat get_img() override;
 
-	/**
-	* Get portraits from image image based on bounding boxes
-	* 
-	* @throws std::runtime_error thrown if bounding boxes are out of bounds.
-	* 
-	* @exceptsafe strong exception guarantee.
-	*/
+    /**
+    * @copydoc i_img_editor::get_portraits()
+    */
 	virtual std::vector<portrait> get_portraits() override;
 
-	/**
-	* Set bounding boxes
-	* 
-	* @param bounding boxes which have to be inside the image
-	*
-	* @throws std::runtime_error thrown if bounding boxes are out of bounds.
-	*
-	* @exceptsafe strong exception guarantee.
-	*/
+    /**
+    * @copydoc i_img_editor::set_bounding_boxes()
+    */
 	virtual void set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) override;
 
 private: 
+    //bounding boxes to cut out
 	std::shared_ptr <std::vector<cv::Rect>> m_bounding_boxes;
 
 	// image which is being edited
 	cv::Mat m_img;
 
 	/**
-	* Check if bounding boxes are out of bounds
-	* 
+    * @brief check_bounding_box Check if bounding boxes are out of bounds
 	* @returns false if bounding boxes are out of bounds and true if everything is good. 
 	*/
 	bool check_bounding_box(std::shared_ptr <std::vector<cv::Rect>> bounding_boxes = nullptr);
 
 	/**
-	* Check the invariants
+    * @brief check_invariants Check the invariants
 	*/
 	void check_invariants();
 };

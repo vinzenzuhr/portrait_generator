@@ -20,18 +20,15 @@
 #include <opencv2/videoio.hpp>
 
  /**
- * Grabs a camera and retrieves pictures from it.
+ * @brief camera Grabs a camera and retrieves pictures from it.
  */
 class camera : public i_camera
 {
 public: 
     /**
-    * Grabs a camera
-    *
+    * @brief camera Grabs a camera
     * @param camera_id id of the camera device to open. To open default camera using default backend just pass 0.
-    *
     * @throws std::runtime_error thrown if it couldn't open the camera.
-    *
     * @exceptsafe strong exception guarantee.
     */
     explicit camera(int camera_id = 0);
