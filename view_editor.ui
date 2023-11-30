@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>680</width>
-    <height>570</height>
+    <height>618</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,6 +43,34 @@
     </widget>
    </item>
    <item>
+    <widget class="QFrame" name="frame_3">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Path to save portrait:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="input_path"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QFrame" name="frame_2">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -65,7 +93,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_save">
         <property name="maximumSize">
          <size>
           <width>80</width>
@@ -78,7 +106,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="make_photo">
+       <widget class="QPushButton" name="btn_cancel">
         <property name="maximumSize">
          <size>
           <width>80</width>

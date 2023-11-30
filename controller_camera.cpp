@@ -46,16 +46,12 @@ void controller_camera::click_make_photo() {
 
         if (!img.empty()) {
             faces = std::vector<cv::Rect>(m_face_detector->detect_faces(img));
-            for_each((faces).begin(), (faces).end(), [&img](cv::Rect face) {
-                cv::rectangle(img, face.tl(), face.br(), cv::Scalar(255, 0, 255));
-            });
         }
     }
 
-
     std::shared_ptr<i_img_editor> editor (new img_editor(img));
     std::shared_ptr<view_editor> view (new view_editor);
-    std::shared_ptr<controller_editor> controller(new controller_editor(editor, faces, img, view)); // muss ich liste draus machen
-    m_controller_editors.push_back(controller);
+    std::shared_ptr<controller_editor> controller(new controller_editor(editor, faces, img, view));
+    m_controller_editors.push_back(controller); // TODO: wird nie aufgeräumt
     view->register_controller(std::weak_ptr<controller_editor> (controller));
 }

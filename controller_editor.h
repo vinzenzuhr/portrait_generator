@@ -9,7 +9,7 @@ class controller_editor
 public:
     controller_editor(std::shared_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view);
 
-    void save_img(QImage img);
+    void click_save(std::vector<cv::Rect> faces);
 
 private:
     std::shared_ptr<i_img_editor> m_editor;
