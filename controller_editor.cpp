@@ -1,7 +1,6 @@
 #include "controller_editor.h"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/imgproc.hpp"
-#include <iostream>
 
 controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view) :
     m_editor(editor),
