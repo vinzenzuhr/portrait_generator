@@ -61,7 +61,7 @@ public:
      * @brief set_bounding_boxes set active bounding boxes and shows them to the user
      * @param bounding_boxes bounding boxes in the image
      */
-    void set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes);
+    void set_bounding_boxes(std::vector<cv::Rect> bounding_boxes);
 
     /**
      * @brief set_image shows the user the img

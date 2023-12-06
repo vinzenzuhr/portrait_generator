@@ -32,7 +32,7 @@ public:
     * @brief get_bounding_boxes Get bounding boxes
     * @returns shared pointer to bounding boxes
     */
-	virtual std::shared_ptr<std::vector<cv::Rect>> get_bounding_boxes() =0;
+    virtual std::vector<cv::Rect> get_bounding_boxes() =0;
 
     /**
     * @brief get_img Get image
@@ -53,6 +53,6 @@ public:
     * @throws std::runtime_error thrown if bounding boxes are out of bounds.
     * @exceptsafe strong exception guarantee.
     */
-	virtual void set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) =0;
+    virtual void set_bounding_boxes(std::vector<cv::Rect> bounding_boxes) =0;
 };
 

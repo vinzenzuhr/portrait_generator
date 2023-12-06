@@ -25,12 +25,10 @@ img_editor::img_editor(cv::Mat img) : m_img(img) {
 	}
 }
 
-bool img_editor::check_bounding_box(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) {
-	if (bounding_boxes == nullptr)
-		bounding_boxes = m_bounding_boxes;
+bool img_editor::check_bounding_box(std::vector<cv::Rect> bounding_boxes) {
 	bool result = true;
 	//TODO: Zugriff auf resource bounding_boxes evt. mutexen
-	for_each((*bounding_boxes).begin(), (*bounding_boxes).end(), [&result, this](cv::Rect bounding_box) {
+    for_each(bounding_boxes.begin(), bounding_boxes.end(), [&result, this](cv::Rect bounding_box) {
 		if (bounding_box.tl().x < 0)
 			result = false;
 		if (bounding_box.tl().y < 0)
@@ -47,7 +45,7 @@ void img_editor::check_invariants() {
     assert(!m_img.empty());
 }
 
-std::shared_ptr<std::vector<cv::Rect>> img_editor::get_bounding_boxes() { 
+std::vector<cv::Rect> img_editor::get_bounding_boxes() {
 	return m_bounding_boxes;
 }
 
@@ -56,21 +54,19 @@ cv::Mat img_editor::get_img() {
 }
 
 std::vector<portrait> img_editor::get_portraits() {
-	if (m_bounding_boxes == nullptr)
-		return std::vector<portrait>{};
-	if (!check_bounding_box()) {
+    if (!check_bounding_box(m_bounding_boxes)) {
 		std::cerr << "ERROR! Bounding boxes are out of bounce.";
 		throw std::runtime_error("ERROR! Bounding boxes are out of bounce.");
 	}
 	std::vector<portrait> portraits; 
-	for_each((*m_bounding_boxes).begin(), (*m_bounding_boxes).end(), [this, &portraits](cv::Rect bounding_box) {  
+    for_each(m_bounding_boxes.begin(), m_bounding_boxes.end(), [this, &portraits](cv::Rect bounding_box) {
 		auto croped_img = m_img(bounding_box);  
 		portraits.push_back(portrait(croped_img));
 	}); 
 	return portraits;
 }
 
-void img_editor::set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) {
+void img_editor::set_bounding_boxes(std::vector<cv::Rect> bounding_boxes) {
 	if (!check_bounding_box(bounding_boxes)) {
 		std::cerr << "ERROR! Bounding boxes are out of bounce.";
 		throw std::runtime_error("ERROR! Bounding boxes are out of bounce.");

@@ -17,6 +17,7 @@
  */
 #pragma once 
 #include "i_img_editor.h"
+#include <iostream> //TODO: entfernen
 #include <memory>
 #include <opencv2/core/mat.hpp>
 
@@ -34,12 +35,12 @@ public:
 	*/
 	explicit img_editor(cv::Mat img);
 
-	virtual ~img_editor() {};
+    virtual ~img_editor() {};
 
     /**
     * @copydoc i_img_editor::get_bounding_boxes()
     */
-	virtual std::shared_ptr<std::vector<cv::Rect>> get_bounding_boxes() override;
+    virtual std::vector<cv::Rect> get_bounding_boxes() override;
 
     /**
     * @copydoc i_img_editor::get_img()
@@ -54,11 +55,11 @@ public:
     /**
     * @copydoc i_img_editor::set_bounding_boxes()
     */
-	virtual void set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) override;
+    virtual void set_bounding_boxes(std::vector<cv::Rect> bounding_boxes) override;
 
 private: 
     //bounding boxes to cut out
-	std::shared_ptr <std::vector<cv::Rect>> m_bounding_boxes;
+    std::vector<cv::Rect> m_bounding_boxes;
 
 	// image which is being edited
 	cv::Mat m_img;
@@ -67,7 +68,7 @@ private:
     * @brief check_bounding_box Check if bounding boxes are out of bounds
 	* @returns false if bounding boxes are out of bounds and true if everything is good. 
 	*/
-	bool check_bounding_box(std::shared_ptr <std::vector<cv::Rect>> bounding_boxes = nullptr);
+    bool check_bounding_box(std::vector<cv::Rect> bounding_boxes);
 
 	/**
     * @brief check_invariants Check the invariants

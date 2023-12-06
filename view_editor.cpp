@@ -86,14 +86,14 @@ void view_editor::remove_controller(std::weak_ptr<controller_editor> controller)
     });
 }
 
-void view_editor::set_bounding_boxes(std::shared_ptr<std::vector<cv::Rect>> bounding_boxes) { //TODO: In der View beim Verschieben neue bounding boxes setzen
+void view_editor::set_bounding_boxes(std::vector<cv::Rect> bounding_boxes) { //TODO: In der View beim Verschieben neue bounding boxes setzen
     std::for_each(m_bounding_boxes.begin(), m_bounding_boxes.end(), [this](std::shared_ptr<QGraphicsRectItem> &rect){
         m_scene->removeItem(rect.get());
     });
 
     m_bounding_boxes.clear();
 
-    std::for_each(bounding_boxes->begin(),bounding_boxes->end(), [&](cv::Rect bounding_box){
+    std::for_each(bounding_boxes.begin(),bounding_boxes.end(), [&](cv::Rect bounding_box){
         double factor_width=1.2; //TODO: ist dies eine gute Idee hier zu machen?
         double factor_height=1.5;
         double x_offset=bounding_box.width*(factor_width-1)/2;
