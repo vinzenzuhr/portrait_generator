@@ -32,7 +32,7 @@ controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::
     m_view->set_image(imdisplay);
     m_view->set_bounding_boxes(faces);
 
-    m_editor->set_bounding_boxes(faces); //TODO: Überlegen ob ohne shared pointer
+    m_editor->set_bounding_boxes(faces);
 }
 
 void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes, std::string path) {
@@ -48,9 +48,9 @@ void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes, std::st
         if(!cv::imwrite(path+"/"+file_name, itr->get_img()))
             success=false;
         else {
-            //std::string fullpath (path+"/"+file_name);
-            //std::wstring widestr(fullpath.begin(),fullpath.end());
-            //ShellExecute(GetDesktopWindow(), L"open", widestr.c_str(), NULL, NULL, SW_SHOWNORMAL);
+            std::string fullpath (path+"/"+file_name);
+            std::wstring widestr(fullpath.begin(),fullpath.end());
+            ShellExecute(GetDesktopWindow(), L"open", widestr.c_str(), NULL, NULL, SW_SHOWNORMAL);
         }
 
     }
@@ -59,7 +59,4 @@ void controller_editor::click_save(std::vector<cv::Rect> bounding_boxes, std::st
     }
     else
         MessageBoxW(NULL,L"Failed to save portraits!", L"Error", MB_ICONEXCLAMATION );
-
-
-    //TODO: pfad nutzen + bild öffnen
 }
