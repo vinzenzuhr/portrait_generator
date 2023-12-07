@@ -1,4 +1,4 @@
-# portrait_generator
+# Portrait Generator
 Portrait Generator is a small project developed for the "C++ Programming II" class, utilizing OpenCV and QT Designer.
 
 ## Overview
