@@ -29,6 +29,8 @@ view_editor::view_editor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setAttribute(Qt::WA_AlwaysStackOnTop);
+
     ui->input_path->setText(QDir::currentPath());
 
     m_scene = new QGraphicsScene(this);

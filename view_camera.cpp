@@ -30,6 +30,8 @@ view_camera::view_camera(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setAttribute(Qt::WA_AlwaysStackOnTop);
+
     m_scene = new QGraphicsScene(this);
     ui->graphics_view->setScene(m_scene);
     m_picture = m_scene->addPixmap(QPixmap());
