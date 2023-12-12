@@ -19,7 +19,7 @@
 #define VIEW_CAMERA_H
 
 #include <qgraphicsscene>
-#include <QOpenGLWidget>
+#include <QWidget>
 #include <memory>
 
 namespace Ui {
@@ -32,7 +32,7 @@ class controller_camera;
 /**
  * @brief view_camera MVC View of the camera GUI
  */
-class view_camera : public QOpenGLWidget
+class view_camera : public QWidget
 {
     Q_OBJECT
 

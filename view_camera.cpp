@@ -25,7 +25,7 @@
 
 
 view_camera::view_camera(QWidget *parent) :
-    QOpenGLWidget(parent),
+    QWidget(parent),
     ui(new Ui::view_camera)
 {
     ui->setupUi(this);

@@ -24,12 +24,10 @@
 #include "ui_view_editor.h"
 
 view_editor::view_editor(QWidget *parent) :
-    QOpenGLWidget(parent),
+    QWidget(parent),
     ui(new Ui::view_editor)
 {
     ui->setupUi(this);
-
-    this->setAttribute(Qt::WA_AlwaysStackOnTop);
 
     ui->input_path->setText(QDir::currentPath());
 

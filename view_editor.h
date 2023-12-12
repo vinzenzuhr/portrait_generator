@@ -20,7 +20,7 @@
 
 #include "opencv2/core/types.hpp"
 #include "qgraphicsscene.h"
-#include <QOpenGLWidget>
+#include <QWidget>
 
 namespace Ui {
 class view_editor;
@@ -32,7 +32,7 @@ class controller_editor;
 /**
  * @brief view_editor MVC View of the editor GUI
  */
-class view_editor : public QOpenGLWidget
+class view_editor : public QWidget
 {
     Q_OBJECT
 
