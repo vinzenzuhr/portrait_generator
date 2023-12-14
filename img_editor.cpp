@@ -60,7 +60,7 @@ std::vector<portrait> img_editor::get_portraits() {
 	}
 	std::vector<portrait> portraits; 
     for_each(m_bounding_boxes.begin(), m_bounding_boxes.end(), [this, &portraits](cv::Rect bounding_box) {
-		auto croped_img = m_img(bounding_box);  
+        auto croped_img = m_img(bounding_box);
 		portraits.push_back(portrait(croped_img));
 	}); 
 	return portraits;

@@ -20,6 +20,7 @@
 #include <string>
 #include <windows.h>
 
+
 controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view) :
     m_editor(editor),
     m_img(img),
@@ -27,8 +28,7 @@ controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::
 {
     m_view->show(); //TODO: evt. ans Ende
 
-    //cv::cvtColor(m_img,m_img,cv::COLOR_BGR2RGB);
-    QImage imdisplay((uchar*)m_img.data, m_img.cols, m_img.rows, m_img.step, QImage::Format_RGB888); //TODO: in eigene Funktion
+    QImage imdisplay((uchar*)m_img.data, m_img.cols, m_img.rows, m_img.step, QImage::Format_BGR888);
     m_view->set_image(imdisplay);
     m_view->set_bounding_boxes(faces);
 

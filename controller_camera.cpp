@@ -21,6 +21,9 @@
 #include "view_editor.h"
 #include <opencv2/imgproc.hpp>
 
+
+#include <opencv2/highgui.hpp>
+
 controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :
     m_camera(camera),
     m_face_detector(detector),
@@ -47,8 +50,7 @@ void controller_camera::draw_on_image() {
             });
     }
 
-    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
-    QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+    QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_BGR888);
     m_view->set_image(imdisplay); //
 
 }
@@ -61,7 +63,6 @@ void controller_camera::click_make_photo() {
     while(faces.empty())
     {
         img = m_camera->get_current_img();
-        cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
 
         if (!img.empty()) {
             faces = std::vector<cv::Rect>(m_face_detector->detect_faces(img));

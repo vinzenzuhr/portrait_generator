@@ -67,7 +67,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Path to save portrait:</string>
+         <string>Path to save portraits:</string>
         </property>
        </widget>
       </item>

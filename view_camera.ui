@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>688</width>
-    <height>578</height>
+    <height>592</height>
    </rect>
   </property>
   <property name="palette">
@@ -76,6 +76,13 @@
         </property>
        </widget>
       </item>
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Look into the camera and take a photo!</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -97,7 +104,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Make photo</string>
+         <string>Take photo</string>
         </property>
        </widget>
       </item>
