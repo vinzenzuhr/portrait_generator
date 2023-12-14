@@ -26,7 +26,7 @@ controller_editor::controller_editor(std::shared_ptr<i_img_editor> editor, std::
     m_img(img),
     m_view(view)
 {
-    m_view->show(); //TODO: evt. ans Ende
+    m_view->show();
 
     QImage imdisplay((uchar*)m_img.data, m_img.cols, m_img.rows, m_img.step, QImage::Format_BGR888);
     m_view->set_image(imdisplay);

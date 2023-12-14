@@ -21,7 +21,6 @@
 #include <QGraphicsItem>
 #include "ui_view_camera.h"
 #include "view_camera.h"
-#include "view_editor.h"
 
 
 view_camera::view_camera(QWidget *parent) :

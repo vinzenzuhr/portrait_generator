@@ -26,8 +26,7 @@ img_editor::img_editor(cv::Mat img) : m_img(img) {
 }
 
 bool img_editor::check_bounding_box(std::vector<cv::Rect> bounding_boxes) {
-	bool result = true;
-	//TODO: Zugriff auf resource bounding_boxes evt. mutexen
+    bool result = true;
     for_each(bounding_boxes.begin(), bounding_boxes.end(), [&result, this](cv::Rect bounding_box) {
 		if (bounding_box.tl().x < 0)
 			result = false;

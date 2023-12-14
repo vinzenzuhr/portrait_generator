@@ -21,13 +21,10 @@
 #include "view_editor.h"
 #include <opencv2/imgproc.hpp>
 
-
-#include <opencv2/highgui.hpp>
-
 controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :
     m_camera(camera),
     m_face_detector(detector),
-    m_view(view)
+    m_view(view) //TODO: If a view gets destructed, the corresponding controller should be destructed as well.
 {
     m_view->show();
 
@@ -40,7 +37,6 @@ controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shar
 
 void controller_camera::draw_on_image() {
 
-    //TODO: multi threading einführen
     cv::Mat img = m_camera->get_current_img();
 
     if (!img.empty()) {
@@ -72,6 +68,6 @@ void controller_camera::click_make_photo() {
     std::shared_ptr<i_img_editor> editor (new img_editor(img));
     std::shared_ptr<view_editor> view (new view_editor);
     std::shared_ptr<controller_editor> controller(new controller_editor(editor, faces, img, view));
-    m_controller_editors.push_back(controller); // TODO: wird nie aufgeräumt
+    m_controller_editors.push_back(controller); // TODO: controller can't remove itself
     view->register_controller(std::weak_ptr<controller_editor> (controller));
 }

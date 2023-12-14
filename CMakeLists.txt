@@ -16,21 +16,37 @@ qt_standard_project_setup()
 
 
 # Create executable using the specified src
-add_executable(${PROJECT_NAME} main.cpp camera.cpp camera.h controller_camera.h controller_camera.cpp controller_editor.h controller_editor.cpp face_detector.cpp face_detector.h i_camera.h i_face_detector.h i_img_editor.h img_editor.h img_editor.cpp portrait.h portrait.cpp view_camera.h view_camera.cpp view_camera.ui view_editor.h view_editor.cpp view_editor.ui)
+add_executable(${PROJECT_NAME}
+    src/model/main.cpp
+    src/model/camera.cpp
+    src/model/camera.h
+    src/model/face_detector.cpp
+    src/model/face_detector.h
+    src/model/i_camera.h
+    src/model/i_face_detector.h
+    src/model/i_img_editor.h
+    src/model/img_editor.h
+    src/model/img_editor.cpp
+    src/model/portrait.h
+    src/model/portrait.cpp
+    src/ui/controller_camera.h
+    src/ui/controller_camera.cpp
+    src/ui/controller_editor.h
+    src/ui/controller_editor.cpp
+    src/ui/view_camera.h
+    src/ui/view_camera.cpp
+    src/ui/view_camera.ui
+    src/ui/view_editor.h
+    src/ui/view_editor.cpp
+    src/ui/view_editor.ui
+    )
 
-
-
-
-#set(CMAKE_AUTOMOC ON)
-#set(CMAKE_AUTORCC ON)
-#set(CMAKE_AUTOUIC ON)
-
-
-
-#
-
-
-target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${OpenCV_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/resources
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/model
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ui
+    )
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 target_link_libraries(${PROJECT_NAME} Qt6::Widgets Qt6::OpenGLWidgets)#♠ ${OPENGL_LIBRARIES})
@@ -40,7 +56,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE ON
 )
 
-FILE(COPY haarcascade_frontalface_default.xml DESTINATION "${CMAKE_BINARY_DIR}")
+FILE(COPY resources/haarcascade_frontalface_default.xml DESTINATION "${CMAKE_BINARY_DIR}")
 
 # Define required c++ standard to C++11
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
