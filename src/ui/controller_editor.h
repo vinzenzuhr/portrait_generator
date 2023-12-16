@@ -36,7 +36,6 @@ public:
      */
     controller_editor(std::unique_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view);
 
-public slots:
     /**
      * @brief click_save when the button is clicked it saves the portraits
      * @param bounding_boxes bounding boxes inside the image of the portraits to be saved

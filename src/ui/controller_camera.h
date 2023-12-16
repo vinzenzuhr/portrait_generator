@@ -42,7 +42,6 @@ public:
      */
     controller_camera(std::unique_ptr<i_camera> camera, std::unique_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view);
 
-public slots:
     /**
      * @brief click_make_photo when the button is clicked it makes a photo
      */
