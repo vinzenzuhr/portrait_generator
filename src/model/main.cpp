@@ -24,8 +24,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    std::shared_ptr<view_camera> view = std::make_shared<view_camera>();
-    std::shared_ptr<controller_camera> controller = std::make_shared<controller_camera>(std::make_unique<camera>(0), std::make_unique<face_detector>(), view);
+    std::shared_ptr<i_img_manager> manager = std::make_shared<img_manager>(std::make_unique<camera>(0), std::make_unique<face_detector>());
+
+    std::shared_ptr<view_camera> view = std::make_shared<view_camera>(manager);
+    std::shared_ptr<controller_camera> controller = std::make_shared<controller_camera>(manager, view);
     view->register_controller(std::weak_ptr<controller_camera> (controller));
 
     return a.exec();

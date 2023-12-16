@@ -34,4 +34,6 @@ public:
 	* @returns the detected objects are returned as a list of rectangles
 	*/
 	virtual std::vector<cv::Rect> detect_faces(cv::Mat img) =0; 
+
+
 };

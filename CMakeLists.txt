@@ -25,8 +25,12 @@ add_executable(${PROJECT_NAME}
     src/model/i_camera.h
     src/model/i_face_detector.h
     src/model/i_img_editor.h
+    src/model/i_img_manager.h
+    src/model/i_img_observer.h
     src/model/img_editor.h
     src/model/img_editor.cpp
+    src/model/img_manager.h
+    src/model/img_manager.cpp
     src/model/portrait.h
     src/model/portrait.cpp
     src/ui/controller_camera.h

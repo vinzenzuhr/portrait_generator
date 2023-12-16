@@ -18,6 +18,8 @@
 #ifndef VIEW_CAMERA_H
 #define VIEW_CAMERA_H
 
+#include "i_img_observer.h"
+#include "img_manager.h"
 #include <qgraphicsscene>
 #include <QWidget>
 #include <memory>
@@ -32,7 +34,7 @@ class controller_camera;
 /**
  * @brief view_camera MVC View of the camera GUI
  */
-class view_camera : public QWidget
+class view_camera : public QWidget, public i_img_observer
 {
     Q_OBJECT
 
@@ -41,10 +43,15 @@ public:
      * @brief view_camera creates the view
      * @param parent optional QWidget parent
      */
-    view_camera(QWidget *parent = nullptr);
-    //view_camera(std::shared_ptr<controller_camera> controller, QWidget *parent = nullptr);
+    view_camera(std::shared_ptr<i_img_manager> manager, QWidget *parent = nullptr);
 
-    ~view_camera();
+    virtual ~view_camera();
+
+    /**
+     * @brief receive_img receive curreng img and displays it
+     * @param img img to display
+     */
+    virtual void receive_img(cv::Mat img) override;
 
     /**
      * @brief register_controller register an MVC controller
@@ -57,12 +64,6 @@ public:
      * @param controller MVC camera controller
      */
     void remove_controller(std::weak_ptr<controller_camera> controller);
-
-    /**
-     * @brief set_image shows the user the current img
-     * @param img camera img
-     */
-    void set_image(QImage img);
 
 private:
     //registered MVC Controllers of the camera GUI

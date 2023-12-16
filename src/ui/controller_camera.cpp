@@ -21,49 +21,16 @@
 #include "view_editor.h"
 #include <opencv2/imgproc.hpp>
 
-controller_camera::controller_camera(std::unique_ptr<i_camera> camera, std::unique_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :
-    m_camera(std::move(camera)),
-    m_face_detector(std::move(detector)),
+controller_camera::controller_camera(std::shared_ptr<i_img_manager> manager, std::shared_ptr<view_camera> view) :
+    m_img_manager(manager),
     m_view(view) //TODO: If a view gets destructed, the corresponding controller should be destructed as well.
 {
     m_view->show();
-
-    int GUI_RATE_MS=50;
-    m_timer = new QTimer(this);
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(draw_on_image()));
-    m_timer->start(GUI_RATE_MS);
-
-}
-
-void controller_camera::draw_on_image() {
-
-    cv::Mat img = m_camera->get_current_img();
-
-    if (!img.empty()) {
-        std::vector<cv::Rect> faces = m_face_detector->detect_faces(img);
-        for_each(faces.begin(), faces.end(), [&img](cv::Rect face) {
-            cv::rectangle(img, face.tl(), face.br(), cv::Scalar(255, 0, 255));
-            });
-    }
-
-    QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_BGR888);
-    m_view->set_image(imdisplay); //
-
 }
 
 void controller_camera::click_make_photo() {
-    cv::Mat img;
-    std::vector<cv::Rect> faces;
-
-    //Take so many photos until it recognizes at least one face
-    while(faces.empty())
-    {
-        img = m_camera->get_current_img();
-
-        if (!img.empty()) {
-            faces = std::vector<cv::Rect>(m_face_detector->detect_faces(img));
-        }
-    }
+    cv::Mat img(m_img_manager->get_last_img());
+    std::vector<cv::Rect> faces(m_img_manager->get_last_faces());
 
     std::shared_ptr<view_editor> view = std::make_shared<view_editor>();
     std::shared_ptr<controller_editor> controller = std::make_shared<controller_editor>(std::make_unique<img_editor>(img), faces, img, view);

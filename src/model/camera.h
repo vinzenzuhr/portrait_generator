@@ -20,7 +20,7 @@
 #include <opencv2/videoio.hpp>
 
  /**
- * @brief camera Grabs a camera and retrieves pictures from it.
+ * @brief camera Facade of openCVs VideoCapture. It grabs a camera and retrieves pictures from it.
  */
 class camera : public i_camera
 {

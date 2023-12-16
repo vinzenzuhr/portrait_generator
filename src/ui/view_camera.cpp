@@ -23,11 +23,13 @@
 #include "view_camera.h"
 
 
-view_camera::view_camera(QWidget *parent) :
+view_camera::view_camera(std::shared_ptr<i_img_manager> manager, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::view_camera)
 {
     ui->setupUi(this);
+
+    manager->register_observer(this);
 
     m_scene = new QGraphicsScene(this);
     ui->graphics_view->setScene(m_scene);
@@ -52,6 +54,11 @@ void view_camera::click_make_photo() {
     });
 }
 
+void view_camera::receive_img(cv::Mat img){
+    QImage imdisplay((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_BGR888);
+    m_picture->setPixmap(QPixmap::fromImage(imdisplay));
+}
+
 void view_camera::register_controller(std::weak_ptr<controller_camera> controller){
     m_controllers.push_back(controller);
 }
@@ -65,9 +72,4 @@ void view_camera::remove_controller(std::weak_ptr<controller_camera> controller)
             return shared_controller == shared_controller;
         return false;
     });
-}
-
-
-void view_camera::set_image(QImage img) {
-    m_picture->setPixmap(QPixmap::fromImage(img));
 }
