@@ -43,7 +43,7 @@ public:
 
 private:
     //All editor GUI controllers
-    std::list<std::shared_ptr<controller_editor>> m_controller_editors;
+    std::list<std::unique_ptr<controller_editor>> m_controller_editors;
 
     std::shared_ptr<i_img_manager> m_img_manager;
 

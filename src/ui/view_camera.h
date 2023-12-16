@@ -57,17 +57,17 @@ public:
      * @brief register_controller register an MVC controller
      * @param controller MVC camera controller
      */
-    void register_controller(std::weak_ptr<controller_camera> controller);
+    void register_controller(controller_camera* controller);
 
     /**
      * @brief remove_controller removes an MVC controller
      * @param controller MVC camera controller
      */
-    void remove_controller(std::weak_ptr<controller_camera> controller);
+    void remove_controller(controller_camera* controller);
 
 private:
     //registered MVC Controllers of the camera GUI
-    std::list<std::weak_ptr<controller_camera>> m_controllers;
+    std::list<controller_camera*> m_controllers;
 
     //used to show the user current camera img
     QGraphicsPixmapItem *m_picture;

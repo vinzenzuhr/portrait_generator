@@ -33,7 +33,7 @@ void controller_camera::click_make_photo() {
     std::vector<cv::Rect> faces(m_img_manager->get_last_faces());
 
     std::shared_ptr<view_editor> view = std::make_shared<view_editor>();
-    std::shared_ptr<controller_editor> controller = std::make_shared<controller_editor>(std::make_unique<img_editor>(img), faces, img, view);
-    view->register_controller(std::weak_ptr<controller_editor> (controller));
-    m_controller_editors.push_back(controller); // TODO: controller can't remove itself
+    std::unique_ptr<controller_editor> controller = std::make_unique<controller_editor>(std::make_unique<img_editor>(img), faces, img, view);
+    view->register_controller(controller.get());
+    m_controller_editors.push_back(std::move(controller)); // TODO: controller can't remove itself
 }

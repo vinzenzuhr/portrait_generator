@@ -44,12 +44,11 @@ view_camera::~view_camera()
 }
 
 void view_camera::click_make_photo() {
-    std::for_each(m_controllers.begin(), m_controllers.end(),[](std::weak_ptr<controller_camera> controller){
-        if (std::shared_ptr<controller_camera> spt = controller.lock())
-            spt->click_make_photo();
+    std::for_each(m_controllers.begin(), m_controllers.end(),[this](controller_camera* controller){
+        if (controller != nullptr)
+            controller->click_make_photo();
         else{
-            std::cerr << "ERROR! Pointer was already deleted.";
-            throw std::runtime_error("ERROR! Pointer was already deleted.");
+            m_controllers.remove(controller);
         }
     });
 }
@@ -59,17 +58,15 @@ void view_camera::receive_img(cv::Mat img){
     m_picture->setPixmap(QPixmap::fromImage(imdisplay));
 }
 
-void view_camera::register_controller(std::weak_ptr<controller_camera> controller){
+void view_camera::register_controller(controller_camera* controller){
+    if (controller == nullptr){
+        std::cerr << "Nullptr ERROR!";
+        throw std::runtime_error("Nullptr ERROR!");
+    }
     m_controllers.push_back(controller);
 }
 
 
-void view_camera::remove_controller(std::weak_ptr<controller_camera> controller){
-    m_controllers.remove_if([controller](std::weak_ptr<controller_camera> controller_2){
-        std::shared_ptr<controller_camera> shared_controller = controller.lock();
-        std::shared_ptr<controller_camera> shared_controller_2 = controller_2.lock();
-        if(shared_controller && shared_controller)
-            return shared_controller == shared_controller;
-        return false;
-    });
+void view_camera::remove_controller(controller_camera* controller){
+    m_controllers.remove(controller);
 }

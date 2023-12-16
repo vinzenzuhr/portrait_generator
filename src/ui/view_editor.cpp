@@ -61,29 +61,25 @@ void view_editor::click_save(){
                             ));
     });
 
-    std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes, this](std::weak_ptr<controller_editor> controller){
-        if (std::shared_ptr<controller_editor> spt = controller.lock()){
-            spt->click_save(bounding_boxes, ui->input_path->text().toStdString());
-        }
+    std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes, this](controller_editor* controller){
+        if (controller != nullptr)
+            controller->click_save(bounding_boxes, ui->input_path->text().toStdString());
         else{
-            std::cerr << "ERROR! Pointer was already deleted.";
-            throw std::runtime_error("ERROR! Pointer was already deleted.");
+            m_controllers.remove(controller);
         }
     });
 }
 
-void view_editor::register_controller(std::weak_ptr<controller_editor> controller){
+void view_editor::register_controller(controller_editor* controller){
+    if (controller == nullptr){
+        std::cerr << "Nullptr ERROR!";
+        throw std::runtime_error("Nullptr ERROR!");
+    }
     m_controllers.push_back(controller);
 }
 
-void view_editor::remove_controller(std::weak_ptr<controller_editor> controller){
-    m_controllers.remove_if([controller](std::weak_ptr<controller_editor> controller_2){
-        std::shared_ptr<controller_editor> shared_controller = controller.lock();
-        std::shared_ptr<controller_editor> shared_controller_2 = controller_2.lock();
-        if(shared_controller && shared_controller)
-            return shared_controller == shared_controller;
-        return false;
-    });
+void view_editor::remove_controller(controller_editor* controller){
+    m_controllers.remove(controller);
 }
 
 void view_editor::set_bounding_boxes(std::vector<cv::Rect> bounding_boxes) {

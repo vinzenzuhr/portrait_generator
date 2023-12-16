@@ -49,13 +49,13 @@ public:
      * @brief register_controller register an MVC controller
      * @param controller MVC editor controller
      */
-    void register_controller(std::weak_ptr<controller_editor> controller);
+    void register_controller(controller_editor* controller);
 
     /**
      * @brief register_controller remove an MVC controller
      * @param controller MVC editor controller
      */
-    void remove_controller(std::weak_ptr<controller_editor> controller);
+    void remove_controller(controller_editor* controller);
 
     /**
      * @brief set_bounding_boxes set active bounding boxes and shows them to the user
@@ -71,7 +71,7 @@ public:
 
 private:
     //registered MVC Controllers of the editor GUI
-    std::list<std::weak_ptr<controller_editor>> m_controllers;
+    std::list<controller_editor*> m_controllers;
 
     //bounding boxes inside the image
     std::vector<std::shared_ptr<QGraphicsRectItem>> m_bounding_boxes;

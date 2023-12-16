@@ -1,5 +1,6 @@
 #include "img_manager.h"
 #include "opencv2/imgproc.hpp"
+#include <iostream>
 
 img_manager::img_manager(std::unique_ptr<i_camera> camera, std::unique_ptr<i_face_detector> detector) :
     m_camera(std::move(camera)),
@@ -41,7 +42,12 @@ void img_manager::create_new_img(){
         }
 
         std::for_each(m_observers.begin(), m_observers.end(),[img](i_img_observer* observer){
-            observer->receive_img(img);
+            if (observer != nullptr)
+                observer->receive_img(img);
+            else{
+                std::cerr << "Nullptr ERROR!";
+                throw std::runtime_error("Nullptr ERROR!");
+            }
         });
     }
 }
