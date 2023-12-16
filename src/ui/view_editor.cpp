@@ -51,15 +51,15 @@ void view_editor::click_cancel(){
 
 void view_editor::click_save(){
     std::vector<cv::Rect> bounding_boxes;
-    for(int unsigned i=0; i<m_bounding_boxes.size();i++){
+    std::for_each(m_bounding_boxes.begin(), m_bounding_boxes.end(), [&bounding_boxes] (std::shared_ptr<QGraphicsRectItem> bounding_box) {
         bounding_boxes.push_back(cv::Rect(
                             //x,y origin position plus user displacement
-                            m_bounding_boxes[i]->rect().x()+m_bounding_boxes[i]->x(),
-                            m_bounding_boxes[i]->rect().y()+m_bounding_boxes[i]->y(),
-                            m_bounding_boxes[i]->rect().width(),
-                            m_bounding_boxes[i]->rect().height()
+                            bounding_box->rect().x()+bounding_box->x(),
+                            bounding_box->rect().y()+bounding_box->y(),
+                            bounding_box->rect().width(),
+                            bounding_box->rect().height()
                             ));
-    }
+    });
 
     std::for_each(m_controllers.begin(), m_controllers.end(),[bounding_boxes, this](std::weak_ptr<controller_editor> controller){
         if (std::shared_ptr<controller_editor> spt = controller.lock()){

@@ -26,10 +26,10 @@ portrait::portrait(cv::Mat img) : m_img(img){
 	m_create_date = std::chrono::system_clock::now();
 }
 
-void portrait::check_invariants() {
+void portrait::check_invariants() const {
 	assert(m_img.empty());
 }
 
-cv::Mat portrait::get_img() {
+cv::Mat portrait::get_img() const {
 	return m_img;
 }

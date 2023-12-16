@@ -40,17 +40,17 @@ public:
     /**
     * @copydoc i_img_editor::get_bounding_boxes()
     */
-    virtual std::vector<cv::Rect> get_bounding_boxes() override;
+    virtual std::vector<cv::Rect> get_bounding_boxes() const override;
 
     /**
     * @copydoc i_img_editor::get_img()
     */
-	virtual cv::Mat get_img() override;
+    virtual cv::Mat get_img() const override;
 
     /**
     * @copydoc i_img_editor::get_portraits()
     */
-	virtual std::vector<portrait> get_portraits() override;
+    virtual std::vector<portrait> get_portraits() const override;
 
     /**
     * @copydoc i_img_editor::set_bounding_boxes()
@@ -68,11 +68,11 @@ private:
     * @brief check_bounding_box Check if bounding boxes are out of bounds
 	* @returns false if bounding boxes are out of bounds and true if everything is good. 
 	*/
-    bool check_bounding_box(std::vector<cv::Rect> bounding_boxes);
+    bool check_bounding_box(std::vector<cv::Rect> bounding_boxes) const;
 
 	/**
     * @brief check_invariants Check the invariants
 	*/
-	void check_invariants();
+    void check_invariants() const;
 };
 

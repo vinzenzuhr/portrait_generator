@@ -25,7 +25,7 @@ img_editor::img_editor(cv::Mat img) : m_img(img) {
 	}
 }
 
-bool img_editor::check_bounding_box(std::vector<cv::Rect> bounding_boxes) {
+bool img_editor::check_bounding_box(std::vector<cv::Rect> bounding_boxes) const {
     bool result = true;
     for_each(bounding_boxes.begin(), bounding_boxes.end(), [&result, this](cv::Rect bounding_box) {
 		if (bounding_box.tl().x < 0)
@@ -40,19 +40,19 @@ bool img_editor::check_bounding_box(std::vector<cv::Rect> bounding_boxes) {
 	return result;
 }
 
-void img_editor::check_invariants() {
+void img_editor::check_invariants() const {
     assert(!m_img.empty());
 }
 
-std::vector<cv::Rect> img_editor::get_bounding_boxes() {
+std::vector<cv::Rect> img_editor::get_bounding_boxes() const {
 	return m_bounding_boxes;
 }
 
-cv::Mat img_editor::get_img() {
+cv::Mat img_editor::get_img() const {
 	return m_img;
 }
 
-std::vector<portrait> img_editor::get_portraits() {
+std::vector<portrait> img_editor::get_portraits() const {
     if (!check_bounding_box(m_bounding_boxes)) {
 		std::cerr << "ERROR! Bounding boxes are out of bounce.";
 		throw std::runtime_error("ERROR! Bounding boxes are out of bounce.");

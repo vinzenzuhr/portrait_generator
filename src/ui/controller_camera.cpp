@@ -21,9 +21,9 @@
 #include "view_editor.h"
 #include <opencv2/imgproc.hpp>
 
-controller_camera::controller_camera(std::shared_ptr<i_camera> camera, std::shared_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :
-    m_camera(camera),
-    m_face_detector(detector),
+controller_camera::controller_camera(std::unique_ptr<i_camera> camera, std::unique_ptr<i_face_detector> detector, std::shared_ptr<view_camera> view) :
+    m_camera(std::move(camera)),
+    m_face_detector(std::move(detector)),
     m_view(view) //TODO: If a view gets destructed, the corresponding controller should be destructed as well.
 {
     m_view->show();
@@ -65,9 +65,8 @@ void controller_camera::click_make_photo() {
         }
     }
 
-    std::shared_ptr<i_img_editor> editor (new img_editor(img));
-    std::shared_ptr<view_editor> view (new view_editor);
-    std::shared_ptr<controller_editor> controller(new controller_editor(editor, faces, img, view));
-    m_controller_editors.push_back(controller); // TODO: controller can't remove itself
+    std::shared_ptr<view_editor> view = std::make_shared<view_editor>();
+    std::shared_ptr<controller_editor> controller = std::make_shared<controller_editor>(std::make_unique<img_editor>(img), faces, img, view);
     view->register_controller(std::weak_ptr<controller_editor> (controller));
+    m_controller_editors.push_back(controller); // TODO: controller can't remove itself
 }

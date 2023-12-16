@@ -32,20 +32,20 @@ public:
     * @brief get_bounding_boxes Get bounding boxes
     * @returns shared pointer to bounding boxes
     */
-    virtual std::vector<cv::Rect> get_bounding_boxes() =0;
+    virtual std::vector<cv::Rect> get_bounding_boxes() const =0;
 
     /**
     * @brief get_img Get image
     * @returns image which is edited
     */
-	virtual cv::Mat get_img() =0;
+    virtual cv::Mat get_img() const =0;
 
     /**
     * @brief get_portraits Get portraits from image image based on bounding boxes
     * @throws std::runtime_error thrown if bounding boxes are out of bounds.
     * @exceptsafe strong exception guarantee.
     */
-	virtual std::vector<portrait> get_portraits() =0;
+    virtual std::vector<portrait> get_portraits() const =0;
 
     /**
     * @brief set_bounding_boxes Set bounding boxes

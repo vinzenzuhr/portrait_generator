@@ -31,20 +31,20 @@ public:
     * @throws std::runtime_error thrown if image is empty.
 	* @exceptsafe strong exception guarantee.
 	*/
-	explicit portrait(cv::Mat img);
-
-	/**
-    * @brief check_invariants Check invariants
-	*/
-	void check_invariants(); 
+    explicit portrait(cv::Mat img);
 
 	/**
     * @brief get_img get image
 	* @returns image of the person
 	*/
-	cv::Mat get_img();
+    cv::Mat get_img() const;
 
 private:
+    /**
+    * @brief check_invariants Check invariants
+    */
+    void check_invariants() const;
+
 	//creation date of the portrait object
 	std::chrono::time_point<std::chrono::system_clock> m_create_date;
 

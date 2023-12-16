@@ -34,7 +34,7 @@ public:
      * @param img image which was taken by the user
      * @param view MVC View of the editor GUI
      */
-    controller_editor(std::shared_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view);
+    controller_editor(std::unique_ptr<i_img_editor> editor, std::vector<cv::Rect> faces, cv::Mat img, std::shared_ptr<view_editor> view);
 
 public slots:
     /**
@@ -46,7 +46,7 @@ public slots:
 
 private:
     //model of the editor
-    std::shared_ptr<i_img_editor> m_editor;
+    std::unique_ptr<i_img_editor> m_editor;
 
     //image which was taken by the user
     cv::Mat m_img;
