@@ -29,6 +29,8 @@ view_editor::view_editor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setFixedSize(680,640);
+
     ui->input_path->setText(QDir::currentPath());
 
     m_scene = new QGraphicsScene(this);
